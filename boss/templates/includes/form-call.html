@@ -1,0 +1,15 @@
+<!-- <form id="callForm" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="button popup__button">Сохранить</button>
+  </form> -->
+
+  <form class="form_call" id="callForm" method="post">
+    {% csrf_token %}
+    <input type="datetime-local" name="date" id="id_date">
+    <input type="text" name="full_name" maxlength="70" required="" id="id_full_name">
+    <textarea name="question" rows="2"  maxlength="200" id="id_question"></textarea>
+    <input type="text" name="telephone" maxlength="15" id="id_telephone">
+    <textarea name="result" rows="2" maxlength="200" id="id_result"></textarea>
+    <button type="submit" class="button popup__button">Сохранить</button>
+  </form>

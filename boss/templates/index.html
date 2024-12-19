@@ -3,19 +3,27 @@
 {% block title %} звонки {% endblock %}
 {% block content %}
 <body>
-  {% include 'header.html' %}
+  {% include 'includes/header.html' %}
   <main class="page">
     <section class="section_call">
       <h2 class="call_title">Звонки</h2>
-      <ul class="ul_call">
+      <ul class="call_ul">
         {% for call in calls %}
-        <li>
-          {{ call.date|date:"m-d H:i" }}
+        <div class="call_li">
+        <li  data-id="{{ call.id}}">
+          {{ call.date|date:"d/m H:i" }}
           {{ call.full_name }}
           {{ call.question }}
           {{ call.result }}
-          {% endfor %}
+          
+
         </li>
+        <form method="post" action="{% url 'delete_call' call.id %}">
+          {% csrf_token %}
+          <button class="call_delete" type="submit"></button>
+        </form>
+      </div>
+        {% endfor %}
       </ul>
     </section>
 
@@ -58,16 +66,8 @@
   <div class="popup popup_call popup_is-animated">
     <div class="popup__content">
       <button type="button" class="popup__close"></button>
-      <h3 class="popup__title">Обновить аватар</h3>
-      <!-- <form class="popup__form" name="call">
-          <input id="datetime" name="datetime" type="url" class="popup__input popup__input_type_url" placeholder="Ссылка на картинку" required >
-        
-        <button type="submit" class="button popup__button">Сохранить</button> -->
-      <form id="callForm" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="button popup__button">Сохранить</button>
-      </form>
+      <h3 class="popup__title">Добавить звонок</h3>
+      {% include 'includes/form-call.html' %}
     </div>
   </div>
 </body>

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from page.views import index, create_call
+from page.views import index, delete_call
 from django.contrib.auth.views import LoginView, LogoutView
 
 urlpatterns = [
@@ -8,6 +8,6 @@ urlpatterns = [
     # path('accounts/', include('django.contrib.auth.urls')),
     path('login/', LoginView.as_view(template_name='login.html'), name='login'),
     path('logout/', LogoutView.as_view(), name='logout'),
-    path('create_call/', create_call, name='create_call'),
-    path('', index, name='index')
+    path('', index, name='index'),
+    path('delete_call/<int:call_id>/', delete_call, name='delete_call'),
 ]

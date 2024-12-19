@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 
 from .models import Call, Birthday, Reception
@@ -30,14 +30,10 @@ def index(request):
 
 
 
-def create_call(request):
+@login_required
+def delete_call(request, call_id):
+    call = get_object_or_404(Call, id=call_id)
     if request.method == 'POST':
-        form = CallForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return JsonResponse({'success': True})
-        else:
-            return JsonResponse({'success': False, 'errors': form.errors})
-    else:
-        form = CallForm()
-    return render(request, 'create_call.html', {'form': form})
+        call.delete()
+        return redirect('index')
+    # return render(request, 'confirm_delete.html', {'call': call})
