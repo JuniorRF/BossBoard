@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Авторизация {% endblock %}
+{% block content %}
+<div class="login_page">
+	<div class="login_block">
+		<form method="post" class="login_form">
+				{% csrf_token %}
+				<label for="id_username"></label>
+				<input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id_username" placeholder="Имя пользователя">
+				<label for="id_password"></label>
+				<input type="password" name="password" autocomplete="current-password" required="" id="id_password" placeholder="Пароль">
+			<button class="button_login" type="submit">Войти</button>
+		</form>
+	</div>
+</div>
+
+{% endblock %}

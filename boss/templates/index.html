@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} звонки {% endblock %}
+{% block content %}
+<body>
+  {% include 'header.html' %}
+  <main class="page">
+    <section class="section_call">
+      <h2 class="call_title">Звонки</h2>
+      <ul class="ul_call">
+        {% for call in calls %}
+        <li>
+          {{ call.date|date:"m-d H:i" }}
+          {{ call.full_name }}
+          {{ call.question }}
+          {{ call.result }}
+          {% endfor %}
+        </li>
+      </ul>
+    </section>
+
+    <section class="section_birthday">
+      <h2>Дни рождения</h2>
+      <ul class="ul_birthday">
+        {% for birthday in birthdays %}
+        <li>
+          {{ birthday.full_name }}
+          {{ birthday.date|date:"Y-m-d" }}
+          {% if not forloop.last %}<hr>{% endif %}
+          {% endfor %}
+        </li>
+      </ul>
+    </section>
+
+    <section class="section_reception">
+      <h2>Записавшиеся на приём</h2>
+        <table>
+          <thead>
+              <tr>
+                  <th>Сотрудник</th>
+                  <th>Вопрос</th>
+                  <th>Примечание</th>
+              </tr>
+          </thead>
+          <tbody>
+            {% for reception in receptions %}
+            <tr>
+              <td>{{ reception.full_name }}</td>
+              <td>{{ reception.question }}</td>
+              <td>{{ reception.other }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+    </section>
+  </main>
+
+  <div class="popup popup_call popup_is-animated">
+    <div class="popup__content">
+      <button type="button" class="popup__close"></button>
+      <h3 class="popup__title">Обновить аватар</h3>
+      <!-- <form class="popup__form" name="call">
+          <input id="datetime" name="datetime" type="url" class="popup__input popup__input_type_url" placeholder="Ссылка на картинку" required >
+        
+        <button type="submit" class="button popup__button">Сохранить</button> -->
+      <form id="callForm" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button popup__button">Сохранить</button>
+      </form>
+    </div>
+  </div>
+</body>
+<!-- <template id="card-template">
+  <li class="places__item card">
+  </li>
+</template> -->
+<script src="{% static 'js/script.js' %}"></script>
+{% endblock %}

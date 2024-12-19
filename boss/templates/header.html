@@ -1,0 +1,18 @@
+<header class="header">
+	<nav>
+		<ul class="header_nav">
+			<li>
+				<button class="button_popup_call" type="button">popup</button>
+			</li>
+			<li>
+				<a href="/admin">админка</a>
+			</li>
+			<li>
+				<form method="post" action="{% url 'logout' %}">
+					{% csrf_token %}
+					<button class="button_exit" type="submit">выход</button>
+				</form>
+			</li>
+		</ul>
+	</nav>
+</header>
