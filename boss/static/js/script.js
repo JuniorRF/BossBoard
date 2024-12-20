@@ -33,13 +33,33 @@ function clickCloseHandler(evt, popup) {
   }
 }
 
-// кнопки и всплывающих окон
+// Добавить звонок
 
 const btnAddCall = document.querySelector('.button_popup_call');
-const popupNewCall = document.querySelector('.popup_call');
-
-
+const popupNewCall = document.querySelector('.popup_call_new');
 
 btnAddCall.addEventListener('click', function(){
     openPopup(popupNewCall)
+})
+
+// Редактировать звонок
+
+const calls = document.querySelectorAll('.call_li_item');
+const popupEditCall = document.querySelector('.popup_call_eddit');
+const formCall = document.forms.callForm;
+
+calls.forEach((call) => {
+  call.addEventListener('click', () => {
+    const idCall = call.getAttribute('data-id')
+    formCall.setAttribute('action', `"{% url 'edit_call' ${idCall} %}"`)
+    formCall.name.value = call.querySelector('.call_datetime').getAttribute("data-date_time");
+    console.log(call)
+    console.log(formCall)
+
+    formCall.full_name.value = call.querySelector('.call_full_name').textContent;
+    formCall.question.value = call.querySelector('.call_question').textContent;
+    formCall.telephone.value = call.querySelector('.call_telephone').textContent;
+    formCall.result.value = call.querySelector('.call_result').textContent;
+    openPopup(popupEditCall)
+  })
 })

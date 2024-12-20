@@ -10,15 +10,14 @@
       <ul class="call_ul">
         {% for call in calls %}
         <div class="call_li">
-        <li  data-id="{{ call.id}}">
-          {{ call.date|date:"d/m H:i" }}
-          {{ call.full_name }}
-          {{ call.question }}
-          {{ call.result }}
-          
-
+        <li class="call_li_item" data-id="{{ call.id }}">
+          <span data-date_time="{{ call.date }}" class="call_datetime">{{ call.date|date:"d/m H:i" }}</span>
+          <span class="call_full_name">{{ call.full_name }}</span>
+          <span class="call_question">{{ call.question }}</span>
+          <span class="call_telephone">{{ call.telephone }}</span>
+          <span class="call_result">{{ call.result }}</span>
         </li>
-        <form method="post" action="{% url 'delete_call' call.id %}">
+        <form method="post" action="{% url 'delete-call' call.id %}">
           {% csrf_token %}
           <button class="call_delete" type="submit"></button>
         </form>
@@ -63,17 +62,21 @@
     </section>
   </main>
 
-  <div class="popup popup_call popup_is-animated">
+  <div class="popup popup_call_new popup_is-animated">
     <div class="popup__content">
       <button type="button" class="popup__close"></button>
       <h3 class="popup__title">Добавить звонок</h3>
       {% include 'includes/form-call.html' %}
     </div>
   </div>
+
+  <div class="popup popup_call_eddit popup_is-animated">
+    <div class="popup__content">
+      <button type="button" class="popup__close"></button>
+      <h3 class="popup__title">Изменить звонок</h3>
+      {% include 'includes/form-call-edit.html' %}
+    </div>
+  </div>
 </body>
-<!-- <template id="card-template">
-  <li class="places__item card">
-  </li>
-</template> -->
 <script src="{% static 'js/script.js' %}"></script>
 {% endblock %}

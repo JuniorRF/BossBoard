@@ -1,0 +1,9 @@
+<form class="form_call" method="post">
+    {% csrf_token %}
+    <input type="datetime-local" name="date">
+    <input type="text" name="full_name" maxlength="70" required placeholder="Имя">
+    <textarea name="question" rows="2"  maxlength="200" placeholder="Вопрос"></textarea>
+    <input type="text" name="telephone" maxlength="15" placeholder="Телефон">
+    <textarea name="result" rows="2" maxlength="200" placeholder="Результат"></textarea>
+    <button type="submit" class="button popup__button">Обновить</button>
+  </form>

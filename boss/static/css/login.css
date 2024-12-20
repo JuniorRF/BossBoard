@@ -1,0 +1,27 @@
+.login_page {
+    height: 100vh;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login_block {
+    width: 223px;
+    height: 126px;
+    border: 2px solid pink;
+    border-radius: 5px;
+}
+
+.login_form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.button_login {
+    background: pink;
+    width: 70px;
+}

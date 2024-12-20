@@ -37,3 +37,21 @@ def delete_call(request, call_id):
         call.delete()
         return redirect('index')
     # return render(request, 'confirm_delete.html', {'call': call})
+
+
+@login_required
+def edit_call(request, call_id):
+    call = get_object_or_404(Call, id=call_id)
+    if request.method == 'POST':
+        form = CallForm(request.POST, instance=call)
+        if form.is_valid():
+            form.save()
+            return redirect('index')  # Перенаправление на главную страницу после успешного сохранения
+    else:
+        form = CallForm(instance=call)
+
+    context = {
+        'form': form,
+        'call': call,
+    }
+    return render(request, 'edit_call.html', context)
